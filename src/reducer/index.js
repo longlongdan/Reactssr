@@ -6,6 +6,9 @@ const Reducer = (state, action) => {
         case "del":
             return {name:'xiaoli',num:state.num--};
             break;
+        case "change":
+            return {name:'xiaoli',num:state.num};
+            break;
         default: 
             return state;
     }

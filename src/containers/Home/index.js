@@ -3,11 +3,15 @@ import React, { useReducer } from "react"
 import Header from '../../components/Header'
 import Reducer from '../../reducer'
 
-let hello = ()=> {
-    alert("123");
-}
 const Home = () => {
-    let [state, setState] = useReducer(Reducer,{name:'xiaolong', num: 0})
+    let [state, dispatch] = useReducer(Reducer,{name:'xiaolong', num: 0})
+
+    const hello = ()=> {
+        setTimeout(()=>{
+            dispatch({type: 'change'})
+        }, 1000)
+    }
+
     return(
         <div>
             <Header/>
