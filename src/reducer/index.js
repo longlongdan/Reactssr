@@ -1,4 +1,4 @@
-const Reducer = (state= {name:'xiaoli',num:0}, action) => {
+const Reducer = (state, action) => {
     switch(action.type) {
         case "ADD":
             return {name:'xiaoli',num:state.num++};

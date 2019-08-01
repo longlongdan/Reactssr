@@ -1,25 +1,20 @@
-import React from "react"
-import { connect } from 'react-redux'
+import React, { useReducer } from "react"
 
 import Header from '../../components/Header'
-
+import Reducer from '../../reducer'
 
 let hello = ()=> {
     alert("123");
 }
-const Home = (props) => {
+const Home = () => {
+    let [state, setState] = useReducer(Reducer,{name:'xiaolong', num: 0})
     return(
         <div>
             <Header/>
-            {props.name}
+            {state.name}
             <button onClick={hello}>WELCOME TO Home!</button>
         </div>
     )
 }
-const mapStateToProps = (state) => {
-    return {
-        name: state.name
-    }
-}
 
-export default connect(mapStateToProps)(Home);
+export default Home;
