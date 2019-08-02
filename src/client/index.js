@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import Router from '../router'
+import Routers from '../router'
 
 const App = () => {
     return(
         <BrowserRouter>
-            <Router/>
+            <React.Fragment>
+                {Routers.map( (route,index) => <Route key={index} path={route.path} exact={route.exact} component={route.component} ></Route> )}
+            </React.Fragment>
         </BrowserRouter>
     )
 }

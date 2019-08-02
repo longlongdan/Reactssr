@@ -7,7 +7,7 @@ const Reducer = (state, action) => {
             return {name:'xiaoli',num:state.num--};
             break;
         case "change":
-            return {name:'xiaoli',num:state.num};
+            return {name:'xiaoli',num:state.num+1};
             break;
         default: 
             return state;

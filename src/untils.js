@@ -1,16 +1,18 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server'
-import {StaticRouter} from 'react-router-dom';
+import { StaticRouter, Route } from 'react-router-dom';
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import Router from './router';
+import Routers from './router';
 
 
 export const render = (req) => {
     const content = renderToString(
         <StaticRouter context={{}} location={req.path}>
-            <Router/>
+            <React.Fragment>
+                {Routers.map( (route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.component} ></Route> )}
+            </React.Fragment>
         </StaticRouter>
 
     )
