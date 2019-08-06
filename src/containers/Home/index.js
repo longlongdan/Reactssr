@@ -1,29 +1,30 @@
 import React, { useReducer, useEffect } from "react"
 import fetch from 'node-fetch'
+import { connect } from "react-redux";
 
 import Header from '../../components/Header'
-import Reducer from '../../reducer'
+// import Reducer from '../../reducer'
 import { showInfo } from '../../reducer/actions'
 
 const Home = (props) => {
-    let [state, dispatch] = useReducer(Reducer,{data:[]})
-    useEffect(() => {
-        Home.getData(dispatch)
-    })
+
+    useEffect(()=>{
+        // console.log(props);
+        // Home.getData(store);
+        if(!props.data) {
+            props.getData();
+        }
+    },[])
 
     return(
         <div>
             <Header/>
-            {state.data.map((item)=>
-                <div key={item.id}>{item.title}</div>
-            )}
-            {/* <button onClick={hello}>WELCOME TO Home!</button> */}
-            {/* { props.children } */}
+            {props.data?props.data.map(item=><div key={item.id}>{item.title}</div>):''}
         </div>
     )
 }
 Home.getData = (dispatch) => {
-     fetch('http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE')
+    return fetch('http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE')
      .then((res)=>{
          return res.json();
      })
@@ -35,5 +36,14 @@ Home.getData = (dispatch) => {
          console.log(err)
      })
 }
-
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        data: state.data||""
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getData: ()=>{ Home.getData(dispatch) }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

@@ -1,4 +1,4 @@
-const Reducer = (state, action) => {
+const Reducer = (state = {}, action) => {
     switch(action.type) {
         case "show":
             return {

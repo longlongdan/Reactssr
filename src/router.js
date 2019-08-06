@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 import Home from './containers/Home'
 import Login from './containers/Login'
 import Detail from './containers/Detail'
