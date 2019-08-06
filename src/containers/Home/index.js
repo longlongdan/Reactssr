@@ -3,37 +3,33 @@ import fetch from 'node-fetch'
 
 import Header from '../../components/Header'
 import Reducer from '../../reducer'
+import { showInfo } from '../../reducer/actions'
 
-const Home = () => {
-    let [state, dispatch] = useReducer(Reducer,{name:'xiaolong', num: 0})
-
-    const hello = ()=> {
-        setTimeout(()=>{
-            dispatch({type: 'change'})
-        }, 1000)
-    }
-
+const Home = (props) => {
+    let [state, dispatch] = useReducer(Reducer,{data:[]})
     useEffect(() => {
-        Home.getData()
+        Home.getData(dispatch)
     })
 
     return(
         <div>
             <Header/>
-            {state.name}
-            {state.num}
-            <button onClick={hello}>WELCOME TO Home!</button>
+            {state.data.map((item)=>
+                <div key={item.id}>{item.title}</div>
+            )}
+            {/* <button onClick={hello}>WELCOME TO Home!</button> */}
+            {/* { props.children } */}
         </div>
     )
 }
-Home.getData = () => {
-     // console.log(123);
-     fetch('https://api.github.com/users/chrissycoyier/repos')
+Home.getData = (dispatch) => {
+     fetch('http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE')
      .then((res)=>{
          return res.json();
      })
      .then((res)=>{
-         console.log(res)
+        //  console.log(res)
+        dispatch(showInfo(res))
      })
      .catch((err)=>{
          console.log(err)

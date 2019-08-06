@@ -3,6 +3,7 @@ import React from 'react';
 
 import Home from './containers/Home'
 import Login from './containers/Login'
+import Detail from './containers/Detail'
 
 
 export default [
@@ -13,14 +14,37 @@ export default [
         component: Home,
         routes: [
             {
-                path: '/ttt',
-                exact: true,
+                path: '/detail',
+                getData: ()=>{console.log('getData login')},
+                component: Detail
             }
         ]
     },{
         path: '/Login',
-        exact: true,
         getData: ()=>{console.log('getData login')},
         component: Login
     }
 ]
+
+// export default [
+//     {
+//         component: Login,
+//         routes: [
+//             {
+//                 path: '/aa',
+//                 exact: true,
+//                 component: Home,
+//                 routes: [
+//                     {
+//                         path: '/detail',
+//                         component: Detail
+//                     }
+//                 ]
+//             },
+//             {
+//                 path: '/Login',
+//                 component: Login
+//             }
+//         ]
+//     }
+// ]
