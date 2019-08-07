@@ -5,10 +5,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { renderRoutes } from 'react-router-config';
+import fetchClient from './request';
 
 import Routers from '../router'
 import Rducer from '../reducer'
-const Store = createStore(Rducer,window.info,applyMiddleware(thunk));
+const Store = createStore(Rducer,window.info,applyMiddleware(thunk.withExtraArgument(fetchClient))); //中间件thunk自定义参数
 
 const App = () => {
     return(

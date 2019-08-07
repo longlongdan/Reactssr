@@ -9,11 +9,13 @@ import { matchRoutes } from 'react-router-config'
 
 import Routers from './router';
 import Reducer from './reducer'
+import fetchServer from './server/request';
 
-const Store = createStore(Reducer, applyMiddleware(thunk));
+
 
 export const render = (req, res) => {
     //匹配路由 获取数据
+    const Store = createStore(Reducer, applyMiddleware(thunk.withExtraArgument(fetchServer)));
     const mathPath = matchRoutes(Routers,req.path);
     const promiseAll = [];
     // console.log(req.path,mathPath)

@@ -1,10 +1,11 @@
 import React, { useReducer, useEffect } from "react"
-import fetch from 'node-fetch'
 import { connect } from "react-redux";
 
-import Header from '../../components/Header'
 // import Reducer from '../../reducer'
-import { showInfo } from '../../reducer/actions'
+import { showInfo } from '../../reducer/actions';
+import fetchClient from '../../client/request';
+import fetchServer from '../../server/request';
+import { getHomeList } from '../../reducer/actions';
 
 const Home = (props) => {
 
@@ -18,24 +19,16 @@ const Home = (props) => {
 
     return(
         <div>
-            <Header/>
             {props.data?props.data.map(item=><div key={item.id}>{item.title}</div>):''}
+            <button onClick={props.test}>test</button>
         </div>
     )
 }
 Home.getData = (dispatch) => {
-    return fetch('http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE')
-     .then((res)=>{
-         return res.json();
-     })
-     .then((res)=>{
-        //  console.log(res)
-        dispatch(showInfo(res))
-     })
-     .catch((err)=>{
-         console.log(err)
-     })
+    // console.log(api);
+    return dispatch(getHomeList);
 }
+
 const mapStateToProps = (state) => {
     return {
         data: state.data||""
@@ -43,7 +36,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getData: ()=>{ Home.getData(dispatch) }
+        getData: ()=>{ dispatch(getHomeList); }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Home);
