@@ -8,6 +8,7 @@ export const showInfo = (info) => {
 export const getHomeList = (dispatch, getState, fetch) => {
     return fetch('/api/news.json?secret=PP87ANTIPIRATE')
      .then((res)=>{
+        //  console.log(res);
          return res.json();
      })
      .then((res)=>{

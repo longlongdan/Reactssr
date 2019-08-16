@@ -1,11 +1,7 @@
 import React, { useReducer, useEffect } from "react"
 import { connect } from "react-redux";
 
-// import Reducer from '../../reducer'
-import { showInfo } from '../../reducer/actions';
-import fetchClient from '../../client/request';
-import fetchServer from '../../server/request';
-import { getHomeList } from '../../reducer/actions';
+import { getHomeList } from './reducer/actions';
 
 const Home = (props) => {
 
@@ -20,7 +16,6 @@ const Home = (props) => {
     return(
         <div>
             {props.data?props.data.map(item=><div key={item.id}>{item.title}</div>):''}
-            <button onClick={props.test}>test</button>
         </div>
     )
 }
@@ -31,7 +26,7 @@ Home.getData = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.data||""
+        data: state.home.data||""
     }
 }
 const mapDispatchToProps = (dispatch) => {
