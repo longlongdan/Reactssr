@@ -16,19 +16,22 @@ export const render = (req, res) => {
     const Store = getServerStore(req);
     const mathPath = matchRoutes(Routers,req.path);
     const promiseAll = [];
-    // console.log(req.path,mathPath)
+    // console.log(mathPath);
     mathPath.map(path=>{ path.route.getData? promiseAll.push(path.route.getData(Store.dispatch)):'' })
     //console.log(Store.getState());
     // console.log("获取数据"+Store);
     //使用promise.all在所有异步请求完成之后执行对应的render函数
+    const context = {}
     Promise.all(promiseAll).then(()=> {
         const content = renderToString(
             <Provider store={Store}>
-                <StaticRouter context={{}} location={req.path}>
+                <StaticRouter context={context} location={req.path}>
                     { renderRoutes(Routers) }
                 </StaticRouter>
             </Provider>
         )
+        //404页面
+        context.notFound&&res.status(404);
         res.send (`<html>
             <head>
                 <title>服务端渲染</title>

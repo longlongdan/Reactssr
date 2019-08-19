@@ -10,7 +10,7 @@ import Routers from '../router'
 const App = () => {
     return(
         <Provider store={getClientStore()}>
-            <BrowserRouter>
+            <BrowserRouter context={{}}>
                 {/* <React.Fragment>
                     {Routers.map( (route,index) => <Route key={index} path={route.path} exact={route.exact} component={route.component} ></Route> )}
                 </React.Fragment> */}

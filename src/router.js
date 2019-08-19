@@ -2,6 +2,7 @@
 import Home from './containers/Home'
 import Transition from './containers/Transition'
 import Header from './components/Header';
+import NotFound from './containers/notFound';
 
 
 export default [
@@ -20,6 +21,8 @@ export default [
                 path: '/transition',
                 getData: Transition.getData,
                 component: Transition
+            },{
+                component: NotFound
             }
         ]
     }
