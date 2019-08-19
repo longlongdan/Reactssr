@@ -13,7 +13,6 @@ const Transition = (props) => {
 
     return (
         <div>
-            {console.log()}
             {
                 props.isLogin
                 ?(props.list?(props.list.map(item => <div key={item.id}>{item.title}</div>)):"")

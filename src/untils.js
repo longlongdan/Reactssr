@@ -30,8 +30,10 @@ export const render = (req, res) => {
                 </StaticRouter>
             </Provider>
         )
+        // console.log(context);
         //404页面
         context.notFound&&res.status(404);
+        context.action==='REPLACE'&&res.status(301);
         res.send (`<html>
             <head>
                 <title>服务端渲染</title>
