@@ -1,6 +1,6 @@
 
 import Home from './containers/Home'
-import Login from './containers/Login'
+import Transition from './containers/Transition'
 import Header from './components/Header';
 
 
@@ -17,9 +17,9 @@ export default [
                 component: Home,
             },
             {
-                path: '/Login',
-                getData: ()=>{console.log('getData login')},
-                component: Login
+                path: '/transition',
+                getData: Transition.getData,
+                component: Transition
             }
         ]
     }

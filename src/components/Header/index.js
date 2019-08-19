@@ -29,17 +29,13 @@ const Header = (props) => {
         })
     }
 
-    const fanyi = () => {
-        console.log("翻译列表");
-    }
-
     return (
         <div>
             <Link to='/'>Home</Link>
             <br/>
             {
                 login
-                ?(<React.Fragment><button onClick={fanyi}>翻译列表</button><br/><button onClick={logout}>退出</button></React.Fragment>)
+                ?(<React.Fragment><Link to='/transition'>翻译列表</Link><br/><button onClick={logout}>退出</button></React.Fragment>)
                 :<button onClick={goLogin}>登录</button>
             }
             { renderRoutes(props.route.routes) }

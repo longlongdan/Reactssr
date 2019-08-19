@@ -5,10 +5,12 @@ import homeReducer from '../containers/Home/reducer';
 import headerReducer from '../components/Header/store';
 import fetchClient from '../client/request';
 import fetchServer from '../server/request';
+import transitionReducer from '../containers/Transition/store'
 
 const reducer = combineReducers({
     home: homeReducer,
-    login: headerReducer
+    login: headerReducer,
+    transition: transitionReducer
 })
 
 export const getClientStore = () => {

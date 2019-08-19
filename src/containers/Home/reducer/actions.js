@@ -6,7 +6,7 @@ export const showInfo = (info) => {
 }
 
 export const getHomeList = (dispatch, getState, fetch) => {
-    return fetch('/api/news.json?secret=PP87ANTIPIRATE')
+    return fetch('/api/news.json')
      .then((res)=>{
         //  console.log(res);
          return res.json();

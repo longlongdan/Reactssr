@@ -1,6 +1,6 @@
 import { CHANGE_LOGIN } from './constants';
 export const changeState = (dispatch, getState, fetch) => {
-    return fetch('/api/isLogin.json?secret=PP87ANTIPIRATE')
+    return fetch('/api/isLogin.json')
     .then(res => {
         return res.json();
     })
