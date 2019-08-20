@@ -2,26 +2,22 @@ import React, { useReducer, useEffect } from "react"
 import { connect } from "react-redux";
 
 import { getHomeList } from './reducer/actions';
+import style from './style.scss';
+import withStyle from '../../withStyle';
 
 const Home = (props) => {
 
     useEffect(()=>{
-        // console.log(props);
-        // Home.getData(store);
         if(!props.data) {
             props.getData();
         }
     },[])
 
     return(
-        <div>
-            {props.data?props.data.map(item=><div key={item.id}>{item.title}</div>):''}
+        <div className='info'>
+            {props.data?props.data.map(item=><div key={item.id} className='item'>{item.title}</div>):''}
         </div>
     )
-}
-Home.getData = (dispatch) => {
-    // console.log(api);
-    return dispatch(getHomeList);
 }
 
 const mapStateToProps = (state) => {
@@ -34,4 +30,9 @@ const mapDispatchToProps = (dispatch) => {
         getData: ()=>{ dispatch(getHomeList); }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+const HomeNew = connect(mapStateToProps,mapDispatchToProps)(withStyle(Home, style));
+HomeNew.getData = (dispatch) => {
+    // console.log(api);
+    return dispatch(getHomeList);
+}
+export default HomeNew;

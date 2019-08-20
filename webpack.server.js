@@ -12,5 +12,11 @@ const serverConfig = {
         path: Path.resolve(__dirname, 'build')
     },
     externals: [nodeExternals()],
+    module: {
+        rules: [{
+            test: /\.scss?$/,
+            use: ['isomorphic-style-loader','css-loader','sass-loader']
+        }]
+    }
 }
 module.exports = webpackMerge(serverConfig,conf)

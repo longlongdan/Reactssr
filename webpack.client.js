@@ -8,6 +8,12 @@ const clientConfig = {
     output: { 
         filename: 'index.js',
         path: Path.resolve(__dirname, 'public')
+    },
+    module: {
+        rules: [{
+                test: /\.scss?$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }]
     }
 }
 module.exports = webpackMerge(clientConfig, conf);

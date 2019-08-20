@@ -4,8 +4,11 @@ import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 
 import { changeState } from './store/actions'
+import style from './style.scss';
+import withStyle from '../../withStyle';
 
 const Header = (props) => {
+
     let { login, getLoginState } = props;
 
     useEffect(() => {
@@ -30,22 +33,20 @@ const Header = (props) => {
     }
 
     return (
-        <div>
-            <Link to='/'>Home</Link>
-            <br/>
-            {
-                login
-                ?(<React.Fragment><Link to='/transition'>翻译列表</Link><br/><button onClick={logout}>退出</button></React.Fragment>)
-                :<button onClick={goLogin}>登录</button>
-            }
+        <React.Fragment>
+            <div className='container'>
+                <Link to='/' className='item'>Home</Link>
+                {
+                    login
+                    ?(<React.Fragment><Link to='/transition' className='item'>翻译列表</Link><button onClick={logout} className='item'>退出</button></React.Fragment>)
+                    :<button onClick={goLogin} className='item'>登录</button>
+                }
+            </div>
             { renderRoutes(props.route.routes) }
-        </div>
+        </React.Fragment>
     )
 }
 
-Header.getData = (dispatch) => {
-    return dispatch(changeState)
-}
 
 const mapStateToProps = (state) => ({
     login: state.login.login
@@ -55,4 +56,9 @@ const mpaStateToDispatch = dispatch => ({
     changeLogin: ()=> {dispatch(changeState)}
 })
 
-export default connect(mapStateToProps,mpaStateToDispatch)(Header);
+
+const HeaderNew = connect(mapStateToProps,mpaStateToDispatch)(withStyle(Header, style));
+HeaderNew.getData = (dispatch) => {
+    return dispatch(changeState)
+}
+export default HeaderNew;

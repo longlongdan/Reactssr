@@ -21,7 +21,7 @@ export const render = (req, res) => {
     //console.log(Store.getState());
     // console.log("获取数据"+Store);
     //使用promise.all在所有异步请求完成之后执行对应的render函数
-    const context = {}
+    const context = {style:[]}
     Promise.all(promiseAll).then(()=> {
         const content = renderToString(
             <Provider store={Store}>
@@ -30,13 +30,14 @@ export const render = (req, res) => {
                 </StaticRouter>
             </Provider>
         )
-        // console.log(context);
+        const styleStr = context.style.length?context.style.join('\n'):'';
         //404页面
         context.notFound&&res.status(404);
         context.action==='REPLACE'&&res.status(301);
         res.send (`<html>
             <head>
                 <title>服务端渲染</title>
+                <style>${styleStr}</style>
             </head>
             <body>
             <div id="root">${content}</div>
