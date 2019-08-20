@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import { getTranstionList } from './store/actions';
 
 
@@ -13,6 +15,10 @@ const Transition = (props) => {
 
     return (
         <div>
+            <Helmet>
+                <title>ssr渲染翻译页面</title>
+                <meta name="description" content="longdan的ssr翻译页面" ></meta>
+            </Helmet>
             {
                 props.isLogin
                 ?(props.list?(props.list.map(item => <div key={item.id}>{item.title}</div>)):"")

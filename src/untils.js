@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import { matchRoutes } from 'react-router-config'
+import { Helmet } from 'react-helmet';
 
 import Routers from './router';
 import { getServerStore } from "./store";
@@ -34,9 +35,12 @@ export const render = (req, res) => {
         //404页面
         context.notFound&&res.status(404);
         context.action==='REPLACE'&&res.status(301);
+        //seo优化title和meta标签
+        const helmet = Helmet.renderStatic();
         res.send (`<html>
             <head>
-                <title>服务端渲染</title>
+            ${helmet.title.toString()}
+            ${helmet.meta.toString()}
                 <style>${styleStr}</style>
             </head>
             <body>
