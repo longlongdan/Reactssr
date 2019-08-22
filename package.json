@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm-run-all --parallel dev:**",
+    "dev": "npm-run-all --parallel dev:test:**",
     "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\"",
     "dev:build:server": "webpack --config webpack.server.js --watch",
-    "dev:build:client": "webpack --config webpack.client.js --watch"
+    "dev:build:client": "webpack --config webpack.client.js --watch",
+    "dev:test": "webpack --config webpack.test.js --watch",
+    "dev:test:start": "nodemon --watch build --exec node \"./build/test.js\""
   },
   "author": "",
   "license": "ISC",
